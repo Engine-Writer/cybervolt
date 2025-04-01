@@ -1,0 +1,24 @@
+name: Deploy to FTP server
+
+on:
+  push:
+    branches:
+      - main # Or your main branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy to FTP server
+      uses: SamKirkland/FTP-Deploy-Action@v4.7.0
+      with:
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        remote-dir: ${{ secrets.FTP_PATH }}
+        local-dir: . # Or the directory containing your website files
+        delete-old-files: true # Optional: Delete old files on the server
