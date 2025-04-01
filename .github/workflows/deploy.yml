@@ -14,11 +14,11 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Deploy to FTP server
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      uses: SamKirkland/FTP-Deploy-Action@v4.7.0
       with:
         server: ${{ secrets.FTP_HOST }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        remote-dir: ${{ secrets.FTP_PATH }}
-        local-dir: ./static/ # Or the directory containing your website files
-        delete-old-files: true # Optional: Delete old files on the server
+        server-dir: ${{ secrets.FTP_PATH }} # Renamed from remote-dir
+        local-dir: ./static/ # The directory containing your website files
+        dangerous-clean-slate: true # Replaces delete-old-files
